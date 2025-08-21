@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import {
   Box,
-  Card,
-  CardContent,
   TextField,
   Button,
   Typography,
@@ -12,6 +10,8 @@ import {
 } from '@mui/material'
 import { MarkEmailRead } from '@mui/icons-material'
 import { AuthLayout } from './AuthLayout'
+import { ResponsiveCard } from './ResponsiveCard'
+import { gradients } from '../theme'
 
 interface EmailVerificationProps {
   email: string
@@ -57,8 +57,7 @@ export function EmailVerification({ email, onVerifyCode, onBack }: EmailVerifica
       subtitle="Enter the verification code we sent you"
       onBack={onBack}
     >
-      <Card sx={{ border: 'none', boxShadow: 'none' }}>
-        <CardContent sx={{ p: isMobile ? 3 : 4 }}>
+      <ResponsiveCard>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Box
               sx={{
@@ -68,7 +67,7 @@ export function EmailVerification({ email, onVerifyCode, onBack }: EmailVerifica
                 width: 64,
                 height: 64,
                 borderRadius: '50%',
-                background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                background: gradients.primary,
                 mb: 2,
               }}
             >
@@ -155,13 +154,6 @@ export function EmailVerification({ email, onVerifyCode, onBack }: EmailVerifica
                   height: 56,
                   fontSize: isMobile ? '16px' : '1rem',
                   fontWeight: 600,
-                  background: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
-                  '&:hover': {
-                    background: 'linear-gradient(45deg, #1565c0 30%, #1976d2 90%)',
-                  },
-                  '&:disabled': {
-                    background: 'rgba(0, 0, 0, 0.12)',
-                  },
                 }}
                 startIcon={
                   isLoading ? (
@@ -215,8 +207,7 @@ export function EmailVerification({ email, onVerifyCode, onBack }: EmailVerifica
               </Button>
             </Box>
           </Box>
-        </CardContent>
-      </Card>
+      </ResponsiveCard>
     </AuthLayout>
   )
 }

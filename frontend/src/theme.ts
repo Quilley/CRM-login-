@@ -1,4 +1,10 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
+
+export const gradients = {
+  primary: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
+  secondary: 'linear-gradient(45deg, #9c27b0 30%, #ce93d8 90%)',
+  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+}
 
 export const theme = createTheme({
   palette: {

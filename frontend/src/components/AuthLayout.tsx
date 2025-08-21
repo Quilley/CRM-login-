@@ -1,14 +1,7 @@
-import { ReactNode } from 'react';
-import { 
-  Box, 
-  Container, 
-  Paper, 
-  useTheme, 
-  useMediaQuery,
-  IconButton,
-  Typography
-} from '@mui/material';
+import type { ReactNode } from 'react';
+import { Box, Container, Paper, IconButton, Typography } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
+import { gradients } from '../theme';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -18,21 +11,18 @@ interface AuthLayoutProps {
   showBackButton?: boolean;
 }
 
-export function AuthLayout({ 
-  children, 
-  title, 
-  subtitle, 
-  onBack, 
-  showBackButton = true 
+export function AuthLayout({
+  children,
+  title,
+  subtitle,
+  onBack,
+  showBackButton = true,
 }: AuthLayoutProps) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   return (
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: gradients.background,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -46,7 +36,7 @@ export function AuthLayout({
               onClick={onBack}
               sx={{
                 position: 'absolute',
-                left: isMobile ? -8 : 0,
+                left: { xs: -8, sm: 0 },
                 top: 0,
                 color: 'white',
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -58,8 +48,8 @@ export function AuthLayout({
               <ArrowBack />
             </IconButton>
           )}
-          
-          <Box sx={{ textAlign: 'center', pt: onBack && showBackButton && isMobile ? 6 : 0 }}>
+
+          <Box sx={{ textAlign: 'center', pt: onBack && showBackButton ? { xs: 6, sm: 0 } : 0 }}>
             <Typography
               variant="h4"
               component="h1"
@@ -67,7 +57,7 @@ export function AuthLayout({
                 color: 'white',
                 fontWeight: 700,
                 mb: 1,
-                fontSize: isMobile ? '2rem' : '2.5rem',
+                fontSize: { xs: '2rem', sm: '2.5rem' },
               }}
             >
               {title}
@@ -77,7 +67,7 @@ export function AuthLayout({
                 variant="body1"
                 sx={{
                   color: 'rgba(255, 255, 255, 0.8)',
-                  fontSize: isMobile ? '0.9rem' : '1rem',
+                  fontSize: { xs: '0.9rem', sm: '1rem' },
                 }}
               >
                 {subtitle}
