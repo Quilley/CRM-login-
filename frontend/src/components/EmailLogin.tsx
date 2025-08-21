@@ -1,17 +1,9 @@
 import { useState } from 'react'
-import {
-  Box,
-  Card,
-  CardContent,
-  TextField,
-  Button,
-  Typography,
-  useTheme,
-  useMediaQuery,
-  CircularProgress,
-} from '@mui/material'
+import { Box, TextField, Button, Typography, CircularProgress } from '@mui/material'
 import { Email } from '@mui/icons-material'
 import { AuthLayout } from './AuthLayout'
+import { ResponsiveCard } from './ResponsiveCard'
+import { gradients } from '../theme'
 
 interface EmailLoginProps {
   onSendVerification: (email: string) => void
@@ -21,8 +13,6 @@ interface EmailLoginProps {
 export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleSendVerification = async () => {
     if (!email || !isValidEmail(email)) return
@@ -52,8 +42,7 @@ export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
       subtitle="Enter your email to receive a verification code"
       onBack={onBack}
     >
-      <Card sx={{ border: 'none', boxShadow: 'none' }}>
-        <CardContent sx={{ p: isMobile ? 3 : 4 }}>
+      <ResponsiveCard>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Box
               sx={{
@@ -63,7 +52,7 @@ export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
                 width: 64,
                 height: 64,
                 borderRadius: '50%',
-                background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                background: gradients.primary,
                 mb: 2,
               }}
             >
@@ -117,7 +106,7 @@ export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
               }}
               InputProps={{
                 sx: {
-                  fontSize: isMobile ? '16px' : '1rem',
+                  fontSize: { xs: '16px', sm: '1rem' },
                 },
               }}
             />
@@ -129,15 +118,8 @@ export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
               disabled={!email || !isValidEmail(email) || isLoading}
               sx={{
                 height: 56,
-                fontSize: isMobile ? '16px' : '1rem',
+                fontSize: { xs: '16px', sm: '1rem' },
                 fontWeight: 600,
-                background: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #1565c0 30%, #1976d2 90%)',
-                },
-                '&:disabled': {
-                  background: 'rgba(0, 0, 0, 0.12)',
-                },
               }}
               startIcon={
                 isLoading ? (
@@ -161,8 +143,7 @@ export function EmailLogin({ onSendVerification, onBack }: EmailLoginProps) {
               Check your email inbox and spam folder for the verification code
             </Typography>
           </Box>
-        </CardContent>
-      </Card>
+      </ResponsiveCard>
     </AuthLayout>
   )
 }

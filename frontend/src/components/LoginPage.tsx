@@ -1,17 +1,9 @@
 import { useState } from 'react'
-import {
-  Box,
-  Card,
-  CardContent,
-  TextField,
-  Button,
-  Typography,
-  useTheme,
-  useMediaQuery,
-  CircularProgress,
-} from '@mui/material'
+import { Box, TextField, Button, Typography, CircularProgress } from '@mui/material'
 import { Phone } from '@mui/icons-material'
 import { AuthLayout } from './AuthLayout'
+import { ResponsiveCard } from './ResponsiveCard'
+import { gradients } from '../theme'
 
 interface LoginPageProps {
   onSendOTP: (phoneNumber: string) => void
@@ -21,8 +13,6 @@ interface LoginPageProps {
 export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleSendOTP = async () => {
     if (!phoneNumber) return
@@ -41,8 +31,7 @@ export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
       subtitle="Sign in to continue to your account"
       onBack={onBack}
     >
-      <Card sx={{ border: 'none', boxShadow: 'none' }}>
-        <CardContent sx={{ p: isMobile ? 3 : 4 }}>
+      <ResponsiveCard>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Box
               sx={{
@@ -52,7 +41,7 @@ export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
                 width: 64,
                 height: 64,
                 borderRadius: '50%',
-                background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
+                background: gradients.primary,
                 mb: 2,
               }}
             >
@@ -99,7 +88,7 @@ export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
               }}
               InputProps={{
                 sx: {
-                  fontSize: isMobile ? '16px' : '1rem',
+                  fontSize: { xs: '16px', sm: '1rem' },
                 },
               }}
             />
@@ -111,15 +100,8 @@ export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
               disabled={!phoneNumber || isLoading}
               sx={{
                 height: 56,
-                fontSize: isMobile ? '16px' : '1rem',
+                fontSize: { xs: '16px', sm: '1rem' },
                 fontWeight: 600,
-                background: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #1565c0 30%, #1976d2 90%)',
-                },
-                '&:disabled': {
-                  background: 'rgba(0, 0, 0, 0.12)',
-                },
               }}
               startIcon={
                 isLoading ? (
@@ -130,8 +112,7 @@ export function LoginPage({ onSendOTP, onBack }: LoginPageProps) {
               {isLoading ? 'Sending...' : 'Send Verification Code'}
             </Button>
           </Box>
-        </CardContent>
-      </Card>
+      </ResponsiveCard>
     </AuthLayout>
   )
 }

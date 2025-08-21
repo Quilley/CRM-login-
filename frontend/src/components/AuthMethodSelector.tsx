@@ -1,16 +1,8 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Button,
-  Typography,
-  Divider,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material'
-import { Phone, Email, Security, AdminPanelSettings } from '@mui/icons-material'
+import { Box, Button, Typography, Divider, useTheme, useMediaQuery } from '@mui/material'
+import { Phone, Email, AdminPanelSettings } from '@mui/icons-material'
 import type { AuthMethod } from '../types/auth'
 import { AuthLayout } from './AuthLayout'
+import { ResponsiveCard } from './ResponsiveCard'
 
 interface AuthMethodSelectorProps {
   onSelectMethod: (method: AuthMethod) => void
@@ -26,8 +18,7 @@ export function AuthMethodSelector({ onSelectMethod }: AuthMethodSelectorProps) 
       subtitle="Select how you'd like to authenticate your account"
       showBackButton={false}
     >
-      <Card sx={{ border: 'none', boxShadow: 'none' }}>
-        <CardContent sx={{ p: isMobile ? 3 : 4 }}>
+      <ResponsiveCard>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
             <Box>
               <Button
@@ -38,15 +29,13 @@ export function AuthMethodSelector({ onSelectMethod }: AuthMethodSelectorProps) 
                   height: 80,
                   fontSize: isMobile ? '16px' : '18px',
                   fontWeight: 600,
-                  background: 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
-                  '&:hover': {
-                    background: 'linear-gradient(45deg, #1565c0 30%, #1976d2 90%)',
-                    transform: 'translateY(-2px)',
-                  },
                   transition: 'all 0.2s ease-in-out',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 1,
+                  '&:hover': {
+                    transform: 'translateY(-2px)',
+                  },
                 }}
                 startIcon={<Phone sx={{ fontSize: '28px !important' }} />}
               >
@@ -192,8 +181,7 @@ export function AuthMethodSelector({ onSelectMethod }: AuthMethodSelectorProps) 
               Both methods are secure and use industry-standard encryption
             </Typography>
           </Box>
-        </CardContent>
-      </Card>
+      </ResponsiveCard>
     </AuthLayout>
   )
 }

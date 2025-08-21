@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import {
   Box,
-  Card,
-  CardContent,
   TextField,
   Button,
   Typography,
@@ -12,6 +10,8 @@ import {
 } from '@mui/material'
 import { AdminPanelSettings } from '@mui/icons-material'
 import { AuthLayout } from './AuthLayout'
+import { ResponsiveCard } from './ResponsiveCard'
+import { gradients } from '../theme'
 
 interface AdminLoginProps {
   onVerifyAdmin: (password: string) => void
@@ -46,8 +46,7 @@ export function AdminLogin({ onVerifyAdmin, onBack }: AdminLoginProps) {
       subtitle="Enter admin password to continue"
       onBack={onBack}
     >
-      <Card sx={{ border: 'none', boxShadow: 'none' }}>
-        <CardContent sx={{ p: isMobile ? 3 : 4 }}>
+      <ResponsiveCard>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Box
               sx={{
@@ -57,7 +56,7 @@ export function AdminLogin({ onVerifyAdmin, onBack }: AdminLoginProps) {
                 width: 64,
                 height: 64,
                 borderRadius: '50%',
-                background: 'linear-gradient(45deg, #9c27b0, #ce93d8)',
+                background: gradients.secondary,
                 mb: 2,
               }}
             >
@@ -113,19 +112,13 @@ export function AdminLogin({ onVerifyAdmin, onBack }: AdminLoginProps) {
             <Button
               fullWidth
               variant="contained"
+              color="secondary"
               onClick={handleVerify}
               disabled={!password || isLoading}
               sx={{
                 height: 56,
                 fontSize: isMobile ? '16px' : '1rem',
                 fontWeight: 600,
-                background: 'linear-gradient(45deg, #9c27b0 30%, #ce93d8 90%)',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #7b1fa2 30%, #9c27b0 90%)',
-                },
-                '&:disabled': {
-                  background: 'rgba(0, 0, 0, 0.12)',
-                },
               }}
               startIcon={
                 isLoading ? (
@@ -136,8 +129,7 @@ export function AdminLogin({ onVerifyAdmin, onBack }: AdminLoginProps) {
               {isLoading ? 'Checking...' : 'Sign in as Admin'}
             </Button>
           </Box>
-        </CardContent>
-      </Card>
+      </ResponsiveCard>
     </AuthLayout>
   )
 }

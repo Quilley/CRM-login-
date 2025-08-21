@@ -26,6 +26,7 @@ import {
   CheckCircle,
   Error,
 } from '@mui/icons-material'
+import { gradients } from '../theme'
 
 interface Location {
   latitude: number
@@ -73,7 +74,7 @@ export function MainPage({ onLogout, isAdmin = false }: MainPageProps) {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: gradients.background,
       }}
     >
       <AppBar
